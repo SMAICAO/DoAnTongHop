@@ -1,0 +1,116 @@
+.employee-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.toggle-switch-container input {
+    opacity: 0; /* Make it invisible */
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Inactive color */
+    transition: 0.4s;
+}
+
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px; /* Space from the left edge of the track */
+    bottom: 4px;
+    background-color: #f9f9f9;
+    transition: 0.4s;
+}
+
+.toggle-switch-container {
+    position: relative;
+    display: inline-block;
+    width: 60px; /* Overall width */
+    height: 28px; /* Overall height */
+    margin-left: 10px; /* Spacing */
+    vertical-align: middle;
+}
+
+.toggle-switch-container input:checked + .slider {
+    background-color: #45a049;
+}
+
+.toggle-switch-container input:checked + .slider::before {
+    transform: translateX(32px); /* 60px (width) - 28px (knob+padding) = 32px */
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round::before {
+    border-radius: 50%; /* Make the knob circular */
+}
+
+#gender-group {
+    display: flex;
+    gap: 20px;
+}
+
+#mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 8x;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
