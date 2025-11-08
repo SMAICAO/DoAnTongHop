@@ -8,23 +8,24 @@
 }
 
 .form-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 15px;
 }
 
 .form-field label {
-  display: block;
-  margin-bottom: 5px;
+  width: 150px;            /* Fixed label width */
+  text-align: left;        /* Align text to left edge */
+  margin-bottom: 0;        /* Remove spacing under label */
 }
 
 .form-field input,
 .form-field select,
 .form-field textarea {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  flex: 1;                 /* Input expands to fill remaining space */
 }
+
 
 .form-field textarea {
   resize: vertical;
@@ -106,11 +107,24 @@ button:hover {
 #mail {
     display: inline-flex;
     align-items: center;
-    gap: 8x;
+    gap: 8px;
 }
 
 .radio-label {
     display: flex;
     align-items: center;
     gap: 5px;
+}
+
+.switch-group {
+    flex: none; 
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+}
+
+.form-field label.toggle-switch-container {
+    width: 60px;
+    height: 28px;
+    margin-right: 0;
 }

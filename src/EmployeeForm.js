@@ -279,18 +279,19 @@ const EmployeeForm = () => {
       <div className="form-field">
         <label>Trạng thái kích hoạt</label>
         
-        <label className="toggle-switch-container">
-          <input
-            type="checkbox"
-            name="isActive"
-            checked={formData.isActive}
-            onChange={handleChange}
-          />
-          
-          <span className="slider round"></span>
-        </label>
-        
-        <b>{formData.isActive ? 'Đã kích hoạt' : 'Chưa kích hoạt'}</b>
+        <div className="switch-group"> 
+            <label className="toggle-switch-container">
+            <input
+                type="checkbox"
+                name="isActive"
+                checked={formData.isActive}
+                onChange={handleChange}
+            />
+            <span className="slider round"></span>
+            </label>
+            
+            <b>{formData.isActive ? 'Đã kích hoạt' : 'Chưa kích hoạt'}</b>
+        </div>
       </div>
 
       <button type="submit">Lưu thông tin</button>
