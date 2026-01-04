@@ -314,6 +314,7 @@ const EmployeeForm = () => {
   /* ================= RENDERING ================= */
   return (
     <div className="wizard-container">
+      <h1>Form Nhập Thông Tin Nhân Viên</h1>
       {/* HEADER */}
       <div className="form-header">
         <div className="status-badge">
