@@ -1,0 +1,62 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  background: #f6f7fb;
+}
+
+.sidebar {
+  width: 260px;
+  background: #0b1220;
+  color: white;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebar__brand {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.sidebar__user {
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+}
+
+.sidebar__name { font-weight: 700; }
+.sidebar__role { opacity: 0.75; font-size: 12px; }
+
+.sidebar__nav {
+  display: grid;
+  gap: 8px;
+}
+
+.navitem {
+  padding: 10px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  opacity: 0.85;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.navitem.active {
+  opacity: 1;
+  border-color: rgba(255,255,255,0.35);
+}
+
+.sidebar__logout {
+  margin-top: auto;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.main {
+  flex: 1;
+  padding: 18px;
+}
