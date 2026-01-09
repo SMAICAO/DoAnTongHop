@@ -61,7 +61,7 @@ export default function AdminTasks() {
         <h2>Quản lý Giao việc (Tasks)</h2>
         <button
           onClick={() => setIsModalOpen(true)}
-          style={{ background: "#007bff", color: "white", padding: "10px 20px", border: "none", cursor: "pointer", borderRadius: 4 }}
+          className="btn-primary"
         >
           + Tạo việc mới
         </button>
@@ -149,7 +149,7 @@ export default function AdminTasks() {
 
               <div style={{ marginTop: 10, display: "flex", justifyContent: "flex-end", gap: 10 }}>
                 <button type="button" onClick={() => setIsModalOpen(false)}>Hủy</button>
-                <button type="submit" style={{ background: "#007bff", color: "white", border: "none", padding: "8px 16px" }}>Giao việc</button>
+                <button type="submit" className="btn-primary">Giao việc</button>
               </div>
             </form>
           </div>

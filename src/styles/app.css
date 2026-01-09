@@ -1,44 +1,53 @@
 :root {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  line-height: 1.4;
+  /* Thêm font Inter nếu có, tăng line-height cho thoáng */
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.5;
 }
 
 body {
   margin: 0;
-  background: #0b1220;
-  color: #111;
+  background: #f0f2f5; /* Đổi nền tối (#0b1220) thành xám sáng */
+  color: #333;         /* Đổi màu chữ chính */
 }
 
 .page {
   min-height: 100vh;
   padding: 24px;
-  background: #f6f7fb;
+  background: #f0f2f5; /* Đồng bộ màu nền với body */
 }
 
 .app-center {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  color: white;
+  color: #333; /* Đổi chữ trắng (#fff) thành đen để hiện trên nền sáng */
 }
 
 .btn-primary {
-  padding: 10px 14px;
+  padding: 10px 20px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 6px; /* Bo góc 6px nhìn gọn hơn 12px */
   cursor: pointer;
   font-weight: 600;
-  background: #1b66ff;
+  background: #4CAF50; /* Đổi màu Xanh dương (#1b66ff) thành Xanh lá */
   color: white;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: #45a049; /* Thêm hiệu ứng hover */
 }
 
 .btn-primary:disabled {
   opacity: 0.65;
   cursor: not-allowed;
+  background: #9ca3af; /* Màu xám khi disable */
 }
 
 code {
-  background: #eef2ff;
+  background: #e5e7eb; /* Đổi nền xanh nhạt sang xám */
+  color: #374151;       /* Màu chữ code đậm hơn */
   padding: 2px 6px;
-  border-radius: 8px;
+  border-radius: 6px;
+  font-family: monospace;
 }

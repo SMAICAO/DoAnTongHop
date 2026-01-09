@@ -110,11 +110,7 @@ export default function AdminEmployees() {
         </div>
         <button
           onClick={() => handleOpenModal(null)}
-          style={{ 
-            background: "#007bff", color: "white", padding: "10px 20px", 
-            border: "none", borderRadius: 6, cursor: "pointer", fontWeight: "bold",
-            display: "flex", alignItems: "center", gap: 8
-          }}
+          className="btn-primary"
         >
           + Thêm mới
         </button>
@@ -320,7 +316,7 @@ export default function AdminEmployees() {
                 </button>
                 <button 
                   type="submit"
-                  style={{ padding: "10px 20px", border: "none", background: "#007bff", color: "white", cursor: "pointer", borderRadius: 4 }}
+                  className="btn-primary"
                 >
                   Lưu thay đổi
                 </button>

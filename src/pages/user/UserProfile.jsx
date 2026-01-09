@@ -43,11 +43,7 @@ export default function UserProfile() {
         </div>
         <Link 
           to="/user/profile/edit" 
-          style={{ 
-            background: "#007bff", color: "white", padding: "10px 20px", 
-            textDecoration: "none", borderRadius: "6px", fontWeight: "500",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-          }}
+          className="btn-primary"
         >
           ✎ Cập nhật hồ sơ
         </Link>

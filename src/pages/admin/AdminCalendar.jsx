@@ -188,7 +188,7 @@ export default function AdminCalendar() {
               </div>
               <div style={{ marginTop: 10, textAlign: "right" }}>
                 <button type="button" onClick={() => setShowModal(false)} style={{ marginRight: 10, padding: "5px 15px", cursor: "pointer" }}>Hủy</button>
-                <button type="submit" style={{ background: "#007bff", color: "white", border: "none", padding: "5px 15px", cursor: "pointer" }}>Lưu</button>
+                <button type="submit" className="btn-primary">Lưu</button>
               </div>
             </form>
           </div>
