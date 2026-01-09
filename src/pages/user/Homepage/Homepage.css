@@ -56,9 +56,6 @@ body {
   flex: 1;
   padding: 24px 32px 32px;
   overflow-x: auto;
-
-  /* gradient xanh lá theo chiều dọc (trên → dưới) */
-  background: #ecfdf5;
 }
 
 /* Board wrapper: căn giữa + giới hạn chiều rộng */

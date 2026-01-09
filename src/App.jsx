@@ -8,10 +8,21 @@ import RequireAuth from "./auth/RequireAuth.jsx";
 import { useAuth } from "./auth/AuthContext.jsx";
 
 import AdminLayout from "./layouts/AdminLayout.jsx";
-import EmployeeLayout from "./layouts/EmployeeLayout.jsx";
-
 import AdminDashboard from "./pages/AdminDashboard.jsx";
+import AdminCalendar from "./pages/admin/AdminCalendar.jsx";
+import AdminTasks from "./pages/admin/AdminTasks.jsx";
+import AdminTimesheet from "./pages/admin/AdminTimesheet.jsx";
+import AdminEmployees from "./pages/admin/AdminEmployees.jsx";
+
+import EmployeeLayout from "./layouts/EmployeeLayout.jsx";
 import UserDashboard from "./pages/UserDashboard.jsx";
+import UserProfile from "./pages/user/UserProfile.jsx";
+import UserAttendance from "./pages/user/UserAttendance.jsx";
+import UserMeetings from "./pages/user/UserMeetings.jsx";
+import EmployeeForm from "./pages/user/Employee form/EmployeeForm.jsx";
+import Homepage from "./pages/user/Homepage/Homepage.jsx";
+
+import "./App.css"
 
 function roleHome(role) {
   // Theo spec Word: ADMIN -> /admin/dashboard, USER -> /user/dashboard
@@ -54,12 +65,10 @@ export default function App() {
       >
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboard />} />
-        <Route path="employees" element={<Placeholder title="Quản lý nhân viên" />} />
-        <Route path="timesheet" element={<Placeholder title="Duyệt công / Timesheet" />} />
-        <Route path="reports" element={<Placeholder title="Báo cáo" />} />
-        <Route path="settings" element={<Placeholder title="Cấu hình" />} />
-        <Route path="tasks" element={<Placeholder title="Giao việc" />} />
-        <Route path="meetings" element={<Placeholder title="Lịch họp" />} />
+        <Route path="employees" element={<AdminEmployees />} />
+        <Route path="timesheet" element={<AdminTimesheet />} />
+        <Route path="tasks" element={<AdminTasks />} />
+        <Route path="calendar" element={<AdminCalendar />} />
       </Route>
 
       {/* USER/EMPLOYEE AREA */}
@@ -73,11 +82,11 @@ export default function App() {
       >
         <Route index element={<Navigate to="dashboard" replace />} />
         <Route path="dashboard" element={<UserDashboard />} />
-        <Route path="profile" element={<Placeholder title="Hồ sơ" />} />
-        <Route path="attendance" element={<Placeholder title="Chấm công" />} />
-        <Route path="payroll" element={<Placeholder title="Bảng lương" />} />
-        <Route path="trello" element={<Placeholder title="Trello" />} />
-        <Route path="meetings" element={<Placeholder title="Lịch họp / Deadline" />} />
+        <Route path="profile" element={<UserProfile />} />
+        <Route path="profile/edit" element={<EmployeeForm />} />
+        <Route path="attendance" element={<UserAttendance />} />
+        <Route path="tasks" element={<Homepage />} />
+        <Route path="meetings" element={<UserMeetings />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

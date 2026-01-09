@@ -27,11 +27,8 @@ export default function EmployeeLayout() {
           <NavLink to="/user/attendance" className="navitem">
             Chấm công
           </NavLink>
-          <NavLink to="/user/payroll" className="navitem">
-            Bảng lương
-          </NavLink>
-          <NavLink to="/user/trello" className="navitem">
-            Trello
+          <NavLink to="/user/tasks" className="navitem">
+            Danh sách công việc
           </NavLink>
           <NavLink to="/user/meetings" className="navitem">
             Lịch họp / Deadline

@@ -1,38 +1,97 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+.app-shell {
   min-height: 100vh;
   display: flex;
+  background: #f0f2f5; /* Đổi nền tổng thể thành xám sáng */
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 260px;
+  background: #ffffff; /* Đổi nền đen sang trắng */
+  color: #333;         /* Đổi chữ trắng sang đen */
+  padding: 20px 16px;
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 14px;
+  border-right: 1px solid #e5e7eb; /* Thêm viền phải ngăn cách */
+  box-shadow: 2px 0 10px rgba(0,0,0,0.03); /* Đổ bóng nhẹ */
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar__brand {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-size: 1.25rem;
+  color: #16a34a; /* Đổi màu brand thành xanh lá */
+  padding: 0 12px;
+  margin-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sidebar__user {
+  padding: 12px;
+  background: #f9fafb; /* Nền xám rất nhạt cho box user */
+  border: 1px solid #e5e7eb; /* Viền xám nhạt */
+  border-radius: 12px;
+}
+
+.sidebar__name { 
+  font-weight: 700; 
+  color: #111827; 
+}
+.sidebar__role { 
+  color: #6b7280; /* Màu xám cho role */
+  font-size: 12px; 
+  margin-top: 2px;
+}
+
+/* --- NAVIGATION --- */
+.sidebar__nav {
+  display: grid;
+  gap: 6px;
+}
+
+.navitem {
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #4b5563; /* Màu chữ xám trung tính */
+  border: 1px solid transparent;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.navitem:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.navitem.active {
+  background-color: #dcfce7; /* Nền xanh lá nhạt */
+  color: #166534;            /* Chữ xanh lá đậm */
+  border-color: #bbf7d0;     /* Viền xanh lá nhạt */
+  font-weight: 600;
+}
+
+/* --- LOGOUT BUTTON --- */
+.sidebar__logout {
+  margin-top: auto;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #fee2e2;
+  background: #fef2f2;       /* Nền đỏ rất nhạt */
+  color: #dc2626;            /* Chữ đỏ cảnh báo */
+  cursor: pointer;
+  font-weight: 600;
+  text-align: left;
+  transition: background 0.2s;
+}
+
+.sidebar__logout:hover {
+  background: #fee2e2;
+}
+
+/* --- MAIN CONTENT --- */
+.main {
+  flex: 1;
+  padding: 24px; /* Tăng padding chút cho thoáng */
+  overflow-y: auto;
 }

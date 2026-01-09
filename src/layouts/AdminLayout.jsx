@@ -27,16 +27,10 @@ export default function AdminLayout() {
           <NavLink to="/admin/timesheet" className="navitem">
             Duyệt công / Timesheet
           </NavLink>
-          <NavLink to="/admin/reports" className="navitem">
-            Báo cáo
-          </NavLink>
-          <NavLink to="/admin/settings" className="navitem">
-            Cấu hình
-          </NavLink>
           <NavLink to="/admin/tasks" className="navitem">
             Giao việc
           </NavLink>
-          <NavLink to="/admin/meetings" className="navitem">
+          <NavLink to="/admin/calendar" className="navitem">
             Lịch họp
           </NavLink>
         </nav>

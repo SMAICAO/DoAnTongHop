@@ -1,29 +1,49 @@
+/* =========================================
+   LOGIN PAGE (Light + Green Theme)
+   ========================================= */
+
 .login-page {
   min-height: 100vh;
   display: grid;
   place-items: center;
   padding: 24px;
-  background: radial-gradient(1200px 600px at 50% 0%, #1b66ff2a, transparent),
-              #0b1220;
+  /* Thay nền đen (#0b1220) thành nền sáng + gradient xanh lá nhẹ */
+  background: radial-gradient(1200px 600px at 50% 0%, rgba(22, 163, 74, 0.15), transparent),
+              #f8fafc;
 }
 
 .login-card {
   width: min(420px, 92vw);
   background: #ffffff;
-  border-radius: 18px;
-  padding: 22px;
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+  border-radius: 16px;
+  padding: 32px; /* Tăng padding chút cho thoáng */
+  /* Đổ bóng mềm mại hơn */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.06),
+              0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0fdf4; /* Viền xanh rất nhạt */
 }
 
 .login-title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
-  margin: 0 0 14px 0;
+  margin: 0 0 8px 0;
+  color: #111827; /* Màu chữ đậm */
+  text-align: center;
+  letter-spacing: -0.025em;
+}
+
+/* Thêm dòng phụ (subtitle) nếu cần */
+.login-subtitle {
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 24px;
 }
 
 .login-form {
   display: grid;
-  gap: 12px;
+  gap: 20px; /* Tăng khoảng cách giữa các ô */
 }
 
 .field {
@@ -32,23 +52,36 @@
 }
 
 .label {
-  font-size: 13px;
-  color: #344054;
-  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
 }
 
+/* INPUT STYLES */
 input[type="text"],
+input[type="email"],
 input[type="password"] {
   width: 100%;
-  padding: 11px 12px;
-  border: 1px solid #d0d5dd;
-  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px; /* Bo góc 8px đồng bộ với toàn app */
   outline: none;
-  font-size: 14px;
+  font-size: 15px;
+  color: #111827;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+/* Hiệu ứng Focus màu xanh lá */
+input:focus {
+  border-color: #16a34a; /* Xanh lá đậm */
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2); /* Ring xanh lá nhạt */
 }
 
 input:disabled {
-  background: #f2f4f7;
+  background: #f3f4f6;
+  cursor: not-allowed;
+  color: #9ca3af;
 }
 
 .password-wrap {
@@ -56,34 +89,60 @@ input:disabled {
   grid-template-columns: 1fr auto;
   gap: 8px;
   align-items: center;
+  position: relative;
 }
 
+/* BUTTON STYLES */
+/* Nút phụ / Toggle Password */
 .btn-ghost {
-  border: 1px solid #d0d5dd;
+  border: 1px solid #d1d5db;
   background: white;
-  border-radius: 12px;
-  padding: 10px 12px;
+  border-radius: 8px;
+  padding: 12px;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 600;
+  color: #4b5563;
+  transition: all 0.2s;
+}
+
+.btn-ghost:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+  color: #111827;
 }
 
 .btn-ghost:disabled {
-  opacity: 0.65;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
+/* Nút Submit (Login) - Kế thừa class .btn-primary đã sửa ở trên */
+.login-form .btn-primary {
+  margin-top: 8px;
+  padding: 12px;
+  font-size: 16px;
+  background: #16a34a; /* Đảm bảo màu xanh */
+}
+.login-form .btn-primary:hover {
+  background: #15803d;
+}
+
+/* FEEDBACK & ERRORS */
 .error-box {
-  background: #fff2f2;
-  border: 1px solid #ffd0d0;
-  color: #b00020;
-  padding: 10px 12px;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .hint {
-  margin-top: 8px;
-  font-size: 12px;
-  color: #667085;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #6b7280;
 }
