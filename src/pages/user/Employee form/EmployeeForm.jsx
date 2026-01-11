@@ -117,7 +117,7 @@ const translations = {
 };
 
 // --- MAIN COMPONENT ---
-const EmployeeForm = ({ onSubmitSuccess, initialData }) => {
+const EmployeeForm = () => {
   // 1. State & Hooks
   const [lang, setLang] = useState('vi');
   const [currentStep, setCurrentStep] = useState(1);
@@ -151,10 +151,7 @@ const EmployeeForm = ({ onSubmitSuccess, initialData }) => {
     email: z.email(t('errEmail')),
     department: z.string().min(1, t('errRequired')),
     role: z.string().min(1, t('errRequired')),
-    salary: z.preprocess(
-       (val) => Number(String(val).replace(/,/g, '')),
-       z.number().min(0, t('errSalary'))
-    ),
+    salary: z.number().min(0, t('errSalary')),
     internalMail: z.boolean(),
     // Skills and Files are arrays now
     skills: z.array(z.string()).optional(),
@@ -177,7 +174,13 @@ const EmployeeForm = ({ onSubmitSuccess, initialData }) => {
   } = useForm({
     resolver: zodResolver(employeeSchema),
     mode: 'onChange',
-    defaultValues: initialData || savedDraft || INITIAL_STATE,
+    defaultValues: savedDraft || {
+      fullName: '', gender: '', dob: '',
+      nationality: '', address: '', phone: '', email: '',
+      department: '', role: '',
+      salary: 0, internalMail: false,
+      skills: [], files: [], avatar: null, status: 'Draft'
+    },
   });
 
   const allValues = watch(); // Watch all for autosave and review
@@ -303,20 +306,6 @@ const EmployeeForm = ({ onSubmitSuccess, initialData }) => {
     setSkillInput(""); // Clear the skill text box if it has text
     window.scrollTo(0, 0); // Scroll to top
   }
-
-  const onSubmitApproval = (data) => {
-    setValue('status', 'Pending');
-    
-    // --- THÊM ĐOẠN NÀY ---
-    if (onSubmitSuccess) {
-        onSubmitSuccess(data); // Báo cho Admin biết là đã submit xong data
-        return; 
-    }
-    // ---------------------
-
-    console.log("🚀 Submitted:", data);
-    // ... logic cũ
-  };
 };
 
   /* ================= RENDERING ================= */
@@ -461,22 +450,27 @@ const EmployeeForm = ({ onSubmitSuccess, initialData }) => {
               </div>
 
               <div className="form-field">
-                  <label>{t('salary')} <span className="required">*</span> {isApproved && '🔒'}</label>
-                  <Controller
-                    name="salary"
-                    control={control}
-                    render={({ field }) => (
-                       <NumericFormat 
-                          {...field} 
-                          type="text"
-                          thousandSeparator="," 
-                          suffix=" ₫" 
-                          disabled={isApproved}
-                          onValueChange={(v) => field.onChange(v.value)}
-                       />
-                    )}
-                  />
-                  {errors.salary && <span className="error-msg">{errors.salary.message}</span>}
+                <label>{t('salary')} <span className="required">*</span> {isApproved && '🔒'}</label>
+                <Controller
+                  name="salary"
+                  control={control}
+                  render={({ field }) => (
+                    <NumericFormat
+                      {...field}
+                      type="text"
+                      thousandSeparator=","
+                      suffix=" ₫"
+                      disabled={isApproved}
+                      // 👇 CRITICAL FIX: Use floatValue
+                      onValueChange={(values) => {
+                        // If input is empty, default to 0 to avoid NaN errors
+                        field.onChange(values.floatValue === undefined ? 0 : values.floatValue);
+                      }}
+                      value={field.value} 
+                    />
+                  )}
+                />
+                {errors.salary && <span className="error-msg">{errors.salary.message}</span>}
               </div>
 
               {/* Skill Chips Integration */}

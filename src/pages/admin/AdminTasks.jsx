@@ -15,12 +15,16 @@ export default function AdminTasks() {
   });
 
   // Helper: Lấy tên nhân viên từ mảng ID
-  const getAssigneeNames = (ids) => {
-    return ids
-      .map((id) => EMPLOYEES.find((e) => e.id === id)?.name)
-      .filter(Boolean)
-      .join(", ");
-  };
+const getAssigneeNames = (ids) => {
+  return ids
+    .map((id) => {
+      const emp = EMPLOYEES.find((e) => e.id === id);
+      // SỬA Ở ĐÂY: ưu tiên lấy fullName, nếu không có thì lấy name (fallback)
+      return emp ? (emp.fullName || emp.name) : null; 
+    })
+    .filter(Boolean)
+    .join(", ");
+};
 
   const handleCreateTask = (e) => {
     e.preventDefault();
@@ -131,6 +135,7 @@ export default function AdminTasks() {
               <div>
                 <label>Giao cho ai:</label>
                 <div style={{ maxHeight: 100, overflowY: "auto", border: "1px solid #ccc", padding: 5, marginTop: 5 }}>
+                  {/* Tìm đoạn render checkbox trong modal */}
                   {EMPLOYEES.map(emp => (
                     <div key={emp.id} style={{ marginBottom: 5 }}>
                       <label style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
@@ -140,7 +145,8 @@ export default function AdminTasks() {
                           onChange={() => toggleAssignee(emp.id)}
                           style={{ marginRight: 8 }}
                         />
-                        {emp.name} ({emp.department})
+                        {/* SỬA Ở ĐÂY: đổi emp.name thành emp.fullName */}
+                        {emp.fullName || emp.name} ({emp.department})
                       </label>
                     </div>
                   ))}

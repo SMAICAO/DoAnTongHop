@@ -1,0 +1,582 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage[left=3cm,right=2cm,top=3cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{color}
+
+% Cấu hình hyperlink
+\hypersetup{colorlinks=true, linkcolor=blue, filecolor=blue, urlcolor=blue}
+
+% Cấu hình code listings
+\lstset{
+    language=JavaScript,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=2,
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    rulecolor=\color{black!30}
+}
+
+% Header và Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\lhead{Báo cáo Đồ án}
+
+% Tiêu đề
+\title{
+    \textbf{HỆ THỐNG QUẢN LÝ NHÂN VIÊN VÀ LỊCH LÀM VIỆC}\\
+    \vspace{1cm}
+    \large Báo cáo Đồ án Tổng Hợp
+}
+\author{Sinh viên: [Tên của bạn]\\[0.5cm]Mã số: [Mã số của bạn]}
+\date{Năm học: 2025-2026}
+
+\begin{document}
+
+% ============= TRANG BIA =============
+\maketitle
+
+\newpage
+
+% ============= MỤC LỤC =============
+\tableofcontents
+
+\newpage
+
+% ============= LỜI NÓI ĐẦU =============
+\section*{Lời nói đầu}
+
+Báo cáo này trình bày quá trình phát triển, thiết kế và triển khai hệ thống quản lý nhân viên và lịch làm việc. Đây là một ứng dụng web hiện đại được xây dựng với mục đích quản lý thông tin nhân viên, lịch làm việc, lịch họp và chấm công một cách hiệu quả.
+
+Trong quá trình thực hiện đồ án, chúng tôi đã học hỏi được nhiều kiến thức về phát triển ứng dụng web, quản lý dữ liệu, và giao diện người dùng. Báo cáo này tóm tắt các khía cạnh quan trọng của dự án bao gồm yêu cầu hệ thống, kiến trúc, công nghệ sử dụng, và các tính năng chính.
+
+\newpage
+
+% ============= GIỚI THIỆU =============
+\section{Giới Thiệu}
+
+\subsection{Mục đích của dự án}
+
+Hệ thống quản lý nhân viên và lịch làm việc được phát triển với mục đích:
+\begin{itemize}
+    \item Quản lý thông tin nhân viên một cách tập trung
+    \item Theo dõi lịch làm việc và lịch họp của nhân viên
+    \item Quản lý chấm công và thời gian làm việc
+    \item Cấp quyền hạn khác nhau cho người quản trị (Admin) và nhân viên (User)
+    \item Cung cấp giao diện thân thiện, dễ sử dụng
+\end{itemize}
+
+\subsection{Phạm vi của dự án}
+
+Hệ thống bao gồm các chức năng chính:
+\begin{enumerate}
+    \item \textbf{Quản lý nhân viên}: Thêm, sửa, xóa thông tin nhân viên
+    \item \textbf{Quản lý lịch làm việc}: Lập kế hoạch ca làm việc
+    \item \textbf{Quản lý lịch họp}: Đăng ký và quản lý các cuộc họp
+    \item \textbf{Theo dõi chấm công}: Ghi nhận thời gian vào/ra của nhân viên
+    \item \textbf{Xác thực người dùng}: Đăng nhập an toàn với quyền hạn
+    \item \textbf{Dashboard}: Hiển thị thông tin tổng quan
+\end{enumerate}
+
+\subsection{Tác giả và thời gian thực hiện}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        \textbf{Thành phần} & \textbf{Chi tiết} \\
+        \midrule
+        Tên dự án & Hệ thống Quản lý Nhân viên \\
+        Nhóm thực hiện & [Tên nhóm của bạn] \\
+        Giai đoạn & 01/01/2026 - 01/06/2026 \\
+        Người hướng dẫn & [Tên giáo viên] \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\newpage
+
+% ============= PHÂN TÍCH YÊU CẦU =============
+\section{Phân Tích Yêu Cầu Hệ Thống}
+
+\subsection{Yêu cầu chức năng}
+
+\subsubsection{Chức năng cho người quản trị (Admin)}
+
+\begin{itemize}
+    \item Quản lý danh sách nhân viên (CRUD)
+    \item Xem và quản lý lịch làm việc
+    \item Xem lịch họp của tất cả nhân viên
+    \item Quản lý lịch chấm công
+    \item Tạo báo cáo thống kê
+    \item Quản lý quyền truy cập người dùng
+\end{itemize}
+
+\subsubsection{Chức năng cho nhân viên (User)}
+
+\begin{itemize}
+    \item Xem thông tin cá nhân
+    \item Xem lịch làm việc của mình
+    \item Đăng ký tham gia lịch họp
+    \item Xem lịch chấm công cá nhân
+    \item Cập nhật thông tin cá nhân
+    \item Xem dashboard cá nhân
+\end{itemize}
+
+\subsection{Yêu cầu phi chức năng}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Yêu cầu} & \textbf{Mô tả} \\
+        \hline
+        Hiệu suất & Thời gian phản hồi < 2 giây \\
+        \hline
+        Bảo mật & Mã hóa mật khẩu, xác thực JWT \\
+        \hline
+        Khả dụng & Uptime tối thiểu 99\% \\
+        \hline
+        Khả năng mở rộng & Hỗ trợ 1000+ người dùng đồng thời \\
+        \hline
+        Tính tương thích & Chrome, Firefox, Safari, Edge \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+% ============= THIẾT KẾ HỆ THỐNG =============
+\section{Thiết Kế Hệ Thống}
+
+\subsection{Kiến trúc tổng quát}
+
+Hệ thống được xây dựng theo mô hình 3 tầng:
+
+\begin{itemize}
+    \item \textbf{Tầng Presentation (Giao diện)}: React.js
+    \item \textbf{Tầng Business Logic}: Node.js/Express (nếu có backend)
+    \item \textbf{Tầng Data}: Database (MongoDB/PostgreSQL)
+\end{itemize}
+
+\subsection{Sơ đồ kiến trúc hệ thống}
+
+Sơ đồ kiến trúc được mô tả trong Hình \ref{fig:architecture}:
+
+\begin{figure}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Frontend} & \textbf{Backend} & \textbf{Database} \\
+        \hline
+        React.js & Node.js/Express & MongoDB \\
+        Vite & RESTful API & Collections \\
+        Axios & Authentication & Indexing \\
+        \hline
+    \end{tabular}
+    \caption{Kiến trúc hệ thống}
+    \label{fig:architecture}
+\end{figure}
+
+\subsection{Sơ đồ luồng dữ liệu}
+
+Luồng xác thực người dùng:
+\begin{enumerate}
+    \item Người dùng nhập tên đăng nhập và mật khẩu
+    \item Hệ thống xác thực thông tin với database
+    \item Nếu thành công, tạo JWT token
+    \item Token được lưu trữ ở phía client
+    \item Các yêu cầu tiếp theo sử dụng token này
+\end{enumerate}
+
+\subsection{Mô hình dữ liệu}
+
+Các entity chính trong hệ thống:
+
+\subsubsection{Entity User (Người dùng)}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Trường} & \textbf{Kiểu dữ liệu} & \textbf{Mô tả} \\
+        \hline
+        id & String & ID duy nhất \\
+        email & String & Email đăng nhập \\
+        password & String & Mật khẩu (mã hóa) \\
+        name & String & Họ và tên \\
+        role & Enum & Admin hoặc User \\
+        createdAt & DateTime & Ngày tạo \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Entity Employee (Nhân viên)}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Trường} & \textbf{Kiểu dữ liệu} & \textbf{Mô tả} \\
+        \hline
+        id & String & ID duy nhất \\
+        userId & String & Liên kết với User \\
+        position & String & Vị trí công việc \\
+        department & String & Bộ phận \\
+        phoneNumber & String & Số điện thoại \\
+        address & String & Địa chỉ \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\newpage
+
+% ============= CÔNG NGHỆ VÀ CÔNG CỤ =============
+\section{Công Nghệ và Công Cụ Sử Dụng}
+
+\subsection{Frontend}
+
+\subsubsection{React.js}
+React.js là thư viện JavaScript được phát triển bởi Facebook, cung cấp:
+\begin{itemize}
+    \item Component-based architecture
+    \item Virtual DOM cho hiệu suất tối ưu
+    \item Quản lý state dễ dàng
+    \item Cộng đồng hỗ trợ lớn
+\end{itemize}
+
+\subsubsection{Vite}
+Vite là công cụ build hiện đại:
+\begin{itemize}
+    \item Khởi động dev server nhanh
+    \item Hot Module Replacement (HMR)
+    \item Optimized build
+    \item ESM-first
+\end{itemize}
+
+\subsubsection{Các thư viện bổ sung}
+\begin{itemize}
+    \item \textbf{Axios}: HTTP client
+    \item \textbf{React Router}: Định tuyến ứng dụng
+    \item \textbf{Context API}: Quản lý trạng thái global
+    \item \textbf{CSS}: Styling tùy chỉnh
+\end{itemize}
+
+\subsection{Backend (tùy chọn)}
+
+\subsubsection{Node.js và Express}
+\begin{itemize}
+    \item Runtime JavaScript phía server
+    \item Framework Express cho RESTful API
+    \item Middleware cho xác thực
+\end{itemize}
+
+\subsubsection{Cơ sở dữ liệu}
+\begin{itemize}
+    \item \textbf{MongoDB}: NoSQL database
+    \item \textbf{PostgreSQL}: SQL database (tùy chọn)
+    \item \textbf{JWT}: Xác thực tokens
+\end{itemize}
+
+\subsection{Công cụ phát triển}
+
+\begin{itemize}
+    \item \textbf{VS Code}: Code editor
+    \item \textbf{Git}: Version control
+    \item \textbf{npm/yarn}: Package manager
+    \item \textbf{Postman}: API testing
+    \item \textbf{Chrome DevTools}: Debugging
+\end{itemize}
+
+\newpage
+
+% ============= TRIỂN KHAI VÀ HƯỚNG DẪN Sử DỤNG =============
+\section{Triển Khai và Hướng Dẫn Sử Dụng}
+
+\subsection{Cài đặt và chạy hệ thống}
+
+\subsubsection{Yêu cầu hệ thống}
+\begin{itemize}
+    \item Node.js phiên bản 14 trở lên
+    \item npm hoặc yarn
+    \item Git
+    \item Web browser hiện đại
+\end{itemize}
+
+\subsubsection{Hướng dẫn cài đặt}
+
+\begin{lstlisting}[caption=Cài đặt hệ thống]
+# Clone repository
+git clone <repository-url>
+cd project-folder
+
+# Cài đặt dependencies
+npm install
+
+# Khởi động development server
+npm run dev
+
+# Build cho production
+npm run build
+\end{lstlisting}
+
+\subsection{Hướng dẫn sử dụng}
+
+\subsubsection{Đăng nhập}
+\begin{enumerate}
+    \item Truy cập ứng dụng tại \texttt{http://localhost:5173}
+    \item Nhập email và mật khẩu
+    \item Nhấn nút "Đăng nhập"
+\end{enumerate}
+
+\subsubsection{Chức năng Admin}
+\begin{enumerate}
+    \item Vào trang \textit{Quản lý Nhân viên}
+    \item Thêm/sửa/xóa nhân viên
+    \item Quản lý lịch làm việc
+    \item Xem báo cáo chấm công
+\end{enumerate}
+
+\subsubsection{Chức năng User}
+\begin{enumerate}
+    \item Xem thông tin cá nhân
+    \item Xem lịch làm việc
+    \item Tham gia lịch họp
+    \item Xem chấm công
+\end{enumerate}
+
+\subsection{Cấu trúc thư mục}
+
+\begin{lstlisting}[caption=Cấu trúc thư mục dự án]
+src/
+├── api/              # API client (Axios)
+├── assets/           # Hình ảnh, font chữ
+├── auth/             # Authentication logic
+├── components/       # React components
+├── data/             # Mock data
+├── layouts/          # Layout components
+├── pages/            # Page components
+│   ├── admin/       # Admin pages
+│   └── user/        # User pages
+├── styles/           # CSS styles
+├── App.jsx          # Main component
+├── main.jsx         # Entry point
+└── index.css        # Global styles
+\end{lstlisting}
+
+\newpage
+
+% ============= KẾT QUẢ VÀ ĐÁNH GIÁ =============
+\section{Kết Quả và Đánh Giá}
+
+\subsection{Các tính năng đã hoàn thành}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Tính năng} & \textbf{Hoàn thành} & \textbf{Ghi chú} \\
+        \hline
+        Đăng nhập/Đăng xuất & \checkmark & \\
+        Quản lý nhân viên & \checkmark & \\
+        Lịch làm việc & \checkmark & \\
+        Lịch họp & \checkmark & \\
+        Chấm công & \checkmark & \\
+        Dashboard & \checkmark & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Các thử thách gặp phải}
+
+\begin{itemize}
+    \item \textbf{Quản lý state}: Khó khăn trong việc quản lý state phức tạp với Context API
+    \item \textbf{Hiệu suất}: Tối ưu hóa hiệu suất rendering React
+    \item \textbf{Backend}: Phát triển API phức tạp với xác thực
+    \item \textbf{Responsive design}: Đảm bảo giao diện hoạt động tốt trên mọi thiết bị
+\end{itemize}
+
+\subsection{Giải pháp và cải tiến}
+
+\begin{itemize}
+    \item Sử dụng Redux hoặc Zustand để quản lý state tốt hơn
+    \item Implement lazy loading và code splitting
+    \item Tối ưu hóa API queries
+    \item Sử dụng CSS Grid và Flexbox cho layout responsive
+\end{itemize}
+
+\subsection{Bài học rút ra}
+
+Qua thực hiện dự án này, chúng tôi đã học được:
+
+\begin{enumerate}
+    \item Kiến thức sâu về React.js và các hooks
+    \item Cách thiết kế kiến trúc ứng dụng có thể mở rộng
+    \item Quản lý xác thực và phân quyền
+    \item Làm việc nhóm và version control với Git
+    \item Debugging và testing ứng dụng
+    \item Tầm quan trọng của lập kế hoạch và tài liệu hóa
+\end{enumerate}
+
+\newpage
+
+% ============= KẾT LUẬN =============
+\section{Kết Luận}
+
+\subsection{Tổng kết}
+
+Dự án "Hệ Thống Quản Lý Nhân Viên và Lịch Làm Việc" đã được hoàn thành thành công với đầy đủ các tính năng cơ bản. Ứng dụng cung cấp giao diện thân thiện, dễ sử dụng cho cả người quản trị và nhân viên.
+
+\subsection{Hướng phát triển tương lai}
+
+Để cải thiện hệ thống, có thể phát triển thêm:
+
+\begin{itemize}
+    \item \textbf{Mobile App}: Phát triển ứng dụng mobile cho iOS và Android
+    \item \textbf{Advanced Analytics}: Báo cáo thống kê chi tiết và hình ảnh hóa dữ liệu
+    \item \textbf{Notification System}: Thông báo real-time cho các sự kiện quan trọng
+    \item \textbf{Integration}: Tích hợp với các ứng dụng khác như email, calendar
+    \item \textbf{Offline Support}: Hỗ trợ làm việc offline với sync khi online
+    \item \textbf{AI Features}: Sử dụng AI để dự đoán lịch tối ưu
+    \item \textbf{Performance Optimization}: Caching, CDN, database optimization
+    \item \textbf{Security Enhancement}: Audit logging, 2FA, encryption
+\end{itemize}
+
+\newpage
+
+% ============= TÀI LIỆU THAM KHẢO =============
+\begin{thebibliography}{99}
+
+\bibitem{react} Facebook. \textit{React - A JavaScript library for building user interfaces}. 
+\url{https://react.dev}
+
+\bibitem{vite} Evan You et al. \textit{Vite - Next Generation Frontend Tooling}. 
+\url{https://vitejs.dev}
+
+\bibitem{nodejs} Node.js Foundation. \textit{Node.js - JavaScript Runtime}. 
+\url{https://nodejs.org}
+
+\bibitem{express} Express.js. \textit{Express - Fast, unopinionated web framework for Node.js}. 
+\url{https://expressjs.com}
+
+\bibitem{mongodb} MongoDB Inc. \textit{MongoDB - The Most Popular Document Database}. 
+\url{https://www.mongodb.com}
+
+\bibitem{jwt} Auth0. \textit{JSON Web Tokens (JWT)}. 
+\url{https://jwt.io}
+
+\bibitem{axios} Axios Contributors. \textit{Axios - Promise based HTTP client}. 
+\url{https://axios-http.com}
+
+\end{thebibliography}
+
+\newpage
+
+% ============= PHỤ LỤC =============
+\section{Phụ Lục A: Các Đoạn Code Quan Trọng}
+
+\subsection{Axios Client Configuration}
+
+\begin{lstlisting}[caption=axiosClient.js]
+import axios from 'axios';
+
+const axiosClient = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3000/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Request interceptor
+axiosClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer \${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Response interceptor
+axiosClient.interceptors.response.use(
+  (response) => response.data,
+  (error) => Promise.reject(error)
+);
+
+export default axiosClient;
+\end{lstlisting}
+
+\subsection{Authentication Context}
+
+\begin{lstlisting}[caption=AuthContext.jsx]
+import React, { createContext, useState, useEffect } from 'react';
+import axiosClient from '../api/axiosClient';
+
+export const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Verify token
+      axiosClient.get('/auth/me')
+        .then(data => setUser(data))
+        .catch(() => localStorage.removeItem('token'))
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  const login = async (email, password) => {
+    const data = await axiosClient.post('/auth/login', { email, password });
+    localStorage.setItem('token', data.token);
+    setUser(data.user);
+    return data;
+  };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, loading, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+\end{lstlisting}
+
+\section{Phụ Lục B: Danh Sách Tệp Quan Trọng}
+
+\begin{itemize}
+    \item \texttt{src/pages/admin/AdminDashboard.jsx} - Dashboard cho Admin
+    \item \texttt{src/pages/user/UserDashboard.jsx} - Dashboard cho User
+    \item \texttt{src/pages/admin/AdminEmployees.jsx} - Quản lý nhân viên
+    \item \texttt{src/pages/admin/AdminTimesheet.jsx} - Quản lý lịch làm việc
+    \item \texttt{src/auth/AuthContext.jsx} - Context xác thực
+    \item \texttt{src/api/axiosClient.js} - HTTP client
+\end{itemize}
+
+\end{document}

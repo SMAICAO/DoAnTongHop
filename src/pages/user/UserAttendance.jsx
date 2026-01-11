@@ -105,7 +105,7 @@ export default function UserAttendance() {
       <hr style={{ margin: "30px 0" }} />
 
       {/* SECTION 2: HISTORY */}
-      <h3>Lịch sử chấm công (Tháng 10/2023)</h3>
+      <h3>Lịch sử chấm công (Tháng 1/2025)</h3>
       <table style={{ width: "100%", borderCollapse: "collapse", marginTop: 10 }}>
         <thead>
           <tr style={{ background: "#eee", textAlign: "left" }}>
